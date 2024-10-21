@@ -1,0 +1,50 @@
+@model UsersEntity
+
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<form asp-action="Create" asp-controller="User" method="post">
+    <div class="row justify-content-center"> <!-- Centering the form -->
+        <div class="col-md-4"> <!-- Restricting the width -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter name" required>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Alamat">Address</label>
+                        <input asp-for="Alamat" type="text" class="form-control" placeholder="Enter address" required>
+                        <span asp-validation-for="Alamat" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Telepon">Phone</label>
+                        <input asp-for="Telepon" type="tel" class="form-control" placeholder="Enter phone number" required>
+                        <span asp-validation-for="Telepon" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter email" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <a asp-action="Index" asp-controller="User" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
