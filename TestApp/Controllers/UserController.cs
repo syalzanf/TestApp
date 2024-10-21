@@ -104,7 +104,7 @@ namespace TestApp.Controllers
         }
         public async Task<IActionResult> SendTestEmail()
         {
-            await _emailQueue.EnqueueEmail("mochamadaris112@gmail.com", "WELCOME TO ARS OFFICE", "Welcome");
+            await _emailQueue.EnqueueEmail("totabags111@gmail.com", "WELCOME TO ARS OFFICE", "Welcome");
             Thread.Sleep(100);
             return Ok("Email queued.");
         }
@@ -113,7 +113,7 @@ namespace TestApp.Controllers
         {
             for (int i = 0; i < 5; i++)
             {
-                _emailQueue.EnqueueEmail("mochamadaris112@gmail.com", $"Test Subject {i}", $"Test Message {i}");
+                _emailQueue.EnqueueEmail("totabags111@gmail.com", $"Test Subject {i}", $"Test Message {i}");
             }
             return Ok("Bulk emails have been queued.");
         }      

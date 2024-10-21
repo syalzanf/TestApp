@@ -37,24 +37,34 @@ namespace BGProcess.Services
         {
             _logger.LogInformation("Email processing loop has started.");
 
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                _logger.LogInformation($"QUEUE COUNT: {_emailQueue.Queue.Count}");
-                if (_emailQueue.Queue.Count > 0)
+                _logger.LogInformation($"Execute {_emailQueue.Queue.Count}");
+                while (!stoppingToken.IsCancellationRequested)
                 {
-                    await ProcessEmails(stoppingToken);
+                    _logger.LogInformation($"QUEUE COUNT: {_emailQueue.Queue.Count}");
+                    if (_emailQueue.Queue.Count > 0)
+                    {
+                        await ProcessEmails(stoppingToken);
+                    }
+                    else
+                    {
+                        await Task.Delay(5000, stoppingToken); // Tunggu 10 detik sebelum memeriksa lagi
+                    }
                 }
-                else
-                {
-                    await Task.Delay(10000, stoppingToken); // Tunggu 10 detik sebelum memeriksa lagi
-                }
+
+            } catch (Exception ex)
+            {
+                _logger.LogInformation("Error");
             }
+
 
             _logger.LogInformation("Email Service Stopped");
         }
 
         private async Task ProcessEmails(CancellationToken stoppingToken)
         {
+            _logger.LogInformation($"Processing {_emailQueue.Queue.Count} Emails");
             while (_emailQueue.Queue.Count > 0 && !stoppingToken.IsCancellationRequested)
             {
                 if (_emailQueue.Queue.TryDequeue(out var emailMessage))

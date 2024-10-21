@@ -29,6 +29,8 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSingleton<IEmailQueue, EmailQueueService>();
     builder.Services.AddSingleton<EmailQueueService>();
 
+    builder.Services.AddHostedService<SendMail>();
+
    // builder.Services.AddSingleton<EmailService>();
 
    // builder.Services.AddHostedService<EmailService>();
